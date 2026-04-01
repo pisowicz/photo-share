@@ -1,0 +1,699 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: #f5f5f5;
+  color: #333;
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background: white;
+  border-right: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.sidebar-header {
+  margin-bottom: 30px;
+}
+
+.sidebar-header h1 {
+  font-size: 1.5rem;
+  color: #1a73e8;
+}
+
+.album-nav {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.album-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-bottom: 4px;
+  position: relative;
+}
+
+.album-item:hover {
+  background: #f0f0f0;
+}
+
+.album-item.active {
+  background: #e3f2fd;
+  color: #1a73e8;
+}
+
+.album-icon {
+  margin-right: 12px;
+  font-size: 1.2rem;
+}
+
+.album-name {
+  flex: 1;
+  font-size: 0.95rem;
+}
+
+.album-count {
+  background: #e0e0e0;
+  color: #666;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  margin-right: 8px;
+}
+
+.album-item.active .album-count {
+  background: #1a73e8;
+  color: white;
+}
+
+.album-actions {
+  display: none;
+  gap: 4px;
+}
+
+.album-item:hover .album-actions {
+  display: flex;
+}
+
+.album-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.album-actions button:hover {
+  background: #ddd;
+}
+
+.album-item input {
+  flex: 1;
+  padding: 4px 8px;
+  border: 1px solid #1a73e8;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.new-album-btn {
+  margin-top: 20px;
+  padding: 12px;
+  background: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+
+.new-album-btn:hover {
+  background: #1557b0;
+}
+
+.new-album-form {
+  margin-top: 20px;
+}
+
+.new-album-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.new-album-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.new-album-buttons button {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.new-album-buttons button:first-child {
+  background: #1a73e8;
+  color: white;
+}
+
+.new-album-buttons button:last-child {
+  background: #f0f0f0;
+  color: #666;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.content-header h2 {
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.download-all-btn, .select-mode-btn {
+  padding: 8px 16px;
+  border: 1px solid #1a73e8;
+  background: white;
+  color: #1a73e8;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.download-all-btn:hover {
+  background: #1a73e8;
+  color: white;
+}
+
+.select-mode-btn {
+  border-color: #666;
+  color: #666;
+}
+
+.select-mode-btn:hover, .select-mode-btn.active {
+  background: #666;
+  color: white;
+}
+
+.view-toggle {
+  display: flex;
+  gap: 8px;
+}
+
+.view-toggle button {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.view-toggle button.active {
+  background: #1a73e8;
+  color: white;
+  border-color: #1a73e8;
+}
+
+/* Upload Area */
+.upload-area {
+  background: white;
+  border: 2px dashed #ddd;
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+}
+
+.upload-area.active {
+  border-color: #1a73e8;
+  background: #f0f7ff;
+}
+
+.upload-content {
+  pointer-events: none;
+}
+
+.upload-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.upload-area p {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.upload-area .or {
+  color: #999;
+  font-size: 0.9rem;
+}
+
+.upload-button {
+  display: inline-block;
+  background: #1a73e8;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  pointer-events: auto;
+  transition: background 0.2s;
+}
+
+.upload-button:hover {
+  background: #1557b0;
+}
+
+.uploading {
+  color: #1a73e8;
+  margin-top: 10px;
+}
+
+/* Selection Bar */
+.selection-bar {
+  background: #e3f2fd;
+  border: 1px solid #1a73e8;
+  border-radius: 8px;
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.selection-bar span {
+  font-weight: 500;
+  color: #1a73e8;
+}
+
+.selection-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.selection-actions button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.selection-actions button:first-child {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.download-btn {
+  background: #1a73e8;
+  color: white;
+}
+
+.delete-btn-bar {
+  background: #d32f2f;
+  color: white;
+}
+
+/* Gallery */
+.gallery {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  min-height: 300px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #999;
+}
+
+/* Photo Grid */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.photo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.photo-item {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #f0f0f0;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.photo-grid .photo-item {
+  aspect-ratio: 1;
+}
+
+.photo-list .photo-item {
+  display: flex;
+  height: 120px;
+}
+
+.photo-list .photo-item img,
+.photo-list .video-thumbnail {
+  width: 120px;
+  height: 120px;
+}
+
+.photo-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.delete-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(255,255,255,0.95);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  color: #d32f2f;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  z-index: 10;
+  transition: all 0.2s;
+}
+
+.delete-btn:hover {
+  background: #d32f2f;
+  color: white;
+  transform: scale(1.1);
+}
+
+.download-btn-single {
+  position: absolute;
+  top: 8px;
+  right: 48px;
+  background: rgba(255,255,255,0.95);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  z-index: 10;
+  transition: all 0.2s;
+}
+
+.download-btn-single:hover {
+  background: #1a73e8;
+  transform: scale(1.1);
+}
+
+.photo-checkbox {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(255,255,255,0.95);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  z-index: 10;
+}
+
+.photo-item.selected {
+  box-shadow: 0 0 0 4px #1a73e8;
+}
+
+.photo-item.selected img {
+  opacity: 0.8;
+}
+
+.photo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-thumbnail {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.7);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.photo-list .play-icon {
+  width: 40px;
+  height: 40px;
+  font-size: 1rem;
+}
+
+.photo-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.8));
+  padding: 30px 12px 12px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.photo-item:hover .photo-overlay,
+.photo-overlay:hover {
+  opacity: 1;
+}
+
+.photo-date {
+  color: white;
+  font-size: 0.85rem;
+}
+
+.photo-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.photo-actions select {
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: none;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.photo-actions button {
+  background: rgba(255,255,255,0.9);
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.photo-actions button:hover {
+  background: white;
+}
+
+.photo-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.lightbox img,
+.lightbox video {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 8px;
+}
+
+.close-btn {
+  position: absolute;
+  top: -50px;
+  right: 0;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2.5rem;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.download-btn-lightbox {
+  position: absolute;
+  top: -50px;
+  right: 60px;
+  background: #1a73e8;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.download-btn-lightbox:hover {
+  background: #1557b0;
+}
+
+.lightbox-info {
+  text-align: center;
+  color: white;
+  margin-top: 20px;
+}
+
+.lightbox-info p {
+  margin-bottom: 8px;
+}
+
+.lightbox-info .date {
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+.lightbox-info select {
+  margin-top: 10px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.95rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+    padding: 15px;
+  }
+  
+  .main-content {
+    padding: 20px;
+  }
+  
+  .photo-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+  }
+  
+  .content-header h2 {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .app {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e0e0e0;
+    max-height: 200px;
+  }
+  
+  .album-nav {
+    display: flex;
+    overflow-x: auto;
+    gap: 8px;
+  }
+  
+  .album-item {
+    white-space: nowrap;
+    min-width: 120px;
+  }
+}
